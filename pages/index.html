@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravity Club - LPU</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out forwards;
+    }
+/* Parallax scrolling background */
+@keyframes parallaxBackground {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+body {
+  background-image: url('../src/spacebackground.png');
+  background-size: auto 100%; /* Maintain full height but allow horizontal scrolling */
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: repeat-x; /* Allow horizontal repeating */
+  animation: parallaxBackground 60s linear infinite;
+  min-height: 100vh; /* Ensure body covers full viewport height */
+  margin: 0; /* Remove default margin */
+}
+  </style>
+</head>
+
+<body class="bg-[#000000] text-[#D4D4D8] relative overflow-x-hidden">
+  <!-- Navbar (z-index: 50) -->
+  <nav class="bg-[#000000]/70 backdrop-blur-md sticky top-0 z-50 border-b border-[#6B21A8]/50 w-full">
+    <div class="w-full px-4 py-3 flex justify-between items-center">
+      <div class="flex-shrink-0">
+        <img src="../src/mainlogo.png" alt="Gravity Logo"
+          class="h-16 w-auto hover:scale-105 transition-transform duration-300">
+      </div>
+      <div class="flex items-center">
+        <ul class="hidden md:flex items-center gap-4 font-medium text-white mr-4">
+          <li><a href="index.html"
+              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Home</a>
+          </li>
+          <li class="relative group">
+            <a href="#events"
+              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 flex items-center relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">
+              Events <span class="ml-1 transform group-hover:rotate-180 transition duration-200">▼</span>
+            </a>
+            <ul
+              class="absolute left-0 mt-2 w-48 bg-[#000000]/95 rounded-lg shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-[#6B21A8]/30">
+              <li><a href="ongoing.html"
+                  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Ongoing</a></li>
+              <li><a href="upcoming.html"
+                  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Upcoming</a>
+              </li>
+              <li><a href="archive.html"
+                  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Archive</a></li>
+            </ul>
+          </li>
+          <li><a href="team.html"
+              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Team</a>
+          </li>
+          <li><a href="gallery.html"
+              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Gallery</a>
+          </li>
+          <li><a href="about.html"
+              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">About</a>
+          </li>
+          <li><a href="contact.html"
+              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Contact
+              Us</a></li>
+        </ul>
+        <div class="flex items-center gap-3">
+          <a href="login.html"
+            class="hidden md:block px-4 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium text-white hover:from-[#6D28D9] hover:to-[#2563EB] transition-all duration-300 hover:shadow-lg hover:shadow-[#7C3AED]/20 relative overflow-hidden group">
+            <span
+              class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span class="relative">Login/Signup</span>
+          </a>
+          <button class="md:hidden text-2xl text-white hover:text-[#A855F7] transition-colors duration-200"
+            onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#000000]/95 px-5 py-3 space-y-3 font-medium">
+      <a href="index.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Home</a>
+      <div class="px-3 py-2">
+        <div class="flex items-center text-white mb-1">Events</div>
+        <div class="ml-4 space-y-2 mt-2">
+          <a href="ongoing.html"
+            class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Ongoing</a>
+          <a href="upcoming.html"
+            class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Upcoming</a>
+          <a href="archive.html"
+            class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Archive</a>
+        </div>
+      </div>
+      <a href="team.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Team</a>
+      <a href="gallery.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Gallery</a>
+      <a href="about.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">About</a>
+      <a href="contact.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Contact Us</a>
+      <a href="login.html"
+        class="block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium mt-2 text-center hover:shadow-lg hover:shadow-[#7C3AED]/20 transition duration-300">Login/Signup</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section (z-index: 10, relative) -->
+  <section id="home" class="px-6 md:px-16 py-20 md:py-28 flex flex-col-reverse md:flex-row items-center relative z-10">
+    <div class="md:w-1/2 mt-10 md:mt-0 animate-fadeIn">
+      <h1 class="font-extrabold text-white mb-6 text-4xl md:text-5xl lg:text-6xl">
+        <span class="bg-gradient-to-r from-[#A855F7] to-[#3B82F6] bg-clip-text text-transparent">#FeelTheGravity</span>
+      </h1>
+      <h2 class="text-xl md:text-2xl font-semibold mb-6 text-[#A855F7]">Student Organization at LPU</h2>
+      <p class="leading-relaxed text-lg mb-8 text-[#9CA3AF]">
+        We are a cosmic collective of innovators, creators, and change-makers orbiting the Lovely Professional Universe.
+        Since our launch in 2019, we've been defying limits and creating stellar experiences.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="joinus.html"
+          class="px-6 py-3 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium hover:from-[#6D28D9] hover:to-[#2563EB] transition text-white">Join Our Organization</a>
+        <a href="#channels"
+          class="px-6 py-3 border border-[#6B21A8] text-[#A855F7] rounded-lg font-medium hover:bg-[#6B21A8]/30 transition">Explore more</a>
+      </div>
+    </div>
+    <div class="md:w-1/2 flex justify-center floating">
+      <img src="../src/mainlogo.png" alt="Gravity Spaceship" class="w-full max-w-md">
+    </div>
+  </section>
+
+  <!-- Stats Section (z-index: 10, relative) -->
+  <section class="py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="bg-[#1A0B3A]/50 p-6 rounded-xl">
+          <div class="text-3xl md:text-4xl font-bold text-[#A855F7] mb-2">60+</div>
+          <div class="text-[#9CA3AF]">Events Hosted</div>
+        </div>
+        <div class="bg-[#1A0B3A]/50 p-6 rounded-xl">
+          <div class="text-3xl md:text-4xl font-bold text-[#3B82F6] mb-2">10K+</div>
+          <div class="text-[#9CA3AF]">Participants</div>
+        </div>
+        <div class="bg-[#1A0B3A]/50 p-6 rounded-xl">
+          <div class="text-3xl md:text-4xl font-bold text-[#A855F7] mb-2">15+</div>
+          <div class="text-[#9CA3AF]">Collaborations</div>
+        </div>
+        <div class="bg-[#1A0B3A]/50 p-6 rounded-xl">
+          <div class="text-3xl md:text-4xl font-bold text-[#3B82F6] mb-2">5</div>
+          <div class="text-[#9CA3AF]">Social Initiatives</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Channels Section (z-index: 10, relative) -->
+  <section id="channels" class="px-6 md:px-16 py-20 relative z-10">
+    <div class="max-w-4xl mx-auto text-center mb-16">
+      <h2 class="font-extrabold text-white mb-4 text-3xl md:text-4xl">
+        <span class="bg-gradient-to-r from-[#A855F7] to-[#3B82F6] bg-clip-text text-transparent">Our Cosmic
+          Channels</span>
+      </h2>
+      <p class="text-lg text-[#9CA3AF] max-w-2xl mx-auto">
+        Explore our specialized platforms that cater to diverse interests and talents across the LPU galaxy.
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto space-y-20">
+      <!-- Gravity Originals -->
+      <div class="flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-1/2">
+          <img src="../src/goriginals.png" alt="Gravity Originals" class="w-full floating">
+        </div>
+        <div class="md:w-1/2">
+          <div
+            class="inline-block px-4 py-1 bg-[#6B21A8]/50 rounded-full text-sm font-medium mb-4 border border-[#6B21A8]/30">
+            🎙️ Podcast Channel
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <h3 class="font-bold text-white text-3xl">Gravity Originals</h3>
+            <a href="https://instagram.com/gravityoriginals" target="_blank"
+              class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
+              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+            </a>
+          </div>
+          <p class="text-[#9CA3AF] mb-6">
+            Our flagship podcast series featuring raw, unfiltered conversations with extraordinary individuals from
+            across the cosmos.
+            With 30+ episodes and 5,000+ listens, we bring you stories that inspire.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <span class="text-[#A855F7] mr-2">✦</span>
+              <span>Featured on Apple Podcasts Top 100 Education category</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#A855F7] mr-2">✦</span>
+              <span>Interviews with industry leaders and innovators</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#A855F7] mr-2">✦</span>
+              <span>Monthly live recording sessions</span>
+            </li>
+          </ul>
+          <div class="flex items-center gap-4">
+            <a href="#" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
+              Explore Episodes <span class="ml-2">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gravity Talks -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-10">
+        <div class="md:w-1/2">
+          <img src="../src/gtalkslogo.png" alt="Gravity Talks" class="w-full floating">
+        </div>
+        <div class="md:w-1/2">
+          <div
+            class="inline-block px-4 py-1 bg-[#2563EB]/50 rounded-full text-sm font-medium mb-4 border border-[#2563EB]/30">
+            🎤 Speaker Series
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <h3 class="font-bold text-white text-3xl">Gravity Talks</h3>
+            <a href="https://instagram.com/gravitytalks" target="_blank"
+              class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
+              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+            </a>
+          </div>
+          <p class="text-[#9CA3AF] mb-6">
+            Our premium speaker series that brings cosmic minds to LPU. From Nobel laureates to startup founders,
+            we've hosted 25+ sessions with an average attendance of 300+ students.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <span class="text-[#3B82F6] mr-2">✦</span>
+              <span>Featured speakers from Google, T-Series, and Aha</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#3B82F6] mr-2">✦</span>
+              <span>Interactive Q&A sessions with speakers</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#3B82F6] mr-2">✦</span>
+              <span>Certificate of participation for all attendees</span>
+            </li>
+          </ul>
+          <div class="flex items-center gap-4">
+            <a href="#" class="inline-flex items-center text-[#3B82F6] hover:text-[#2563EB] font-medium">
+              View Past Talks <span class="ml-2">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- G-Blogs -->
+      <div class="flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-1/2">
+          <img src="../src/blogs.png" alt="Gravity Blogs" class="w-full floating">
+        </div>
+        <div class="md:w-1/2">
+          <div
+            class="inline-block px-4 py-1 bg-[#6B21A8]/50 rounded-full text-sm font-medium mb-4 border border-[#6B21A8]/30">
+            ✍️ Creative Hub
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <h3 class="font-bold text-white text-3xl">G-Blogs</h3>
+            <a href="https://instagram.com/gblogs" target="_blank"
+              class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
+              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+            </a>
+          </div>
+          <p class="text-[#9CA3AF] mb-6">
+            A stellar platform for writers and visual artists to showcase their work. With 100+ published pieces,
+            we've become LPU's premier creative publication.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <span class="text-[#A855F7] mr-2">✦</span>
+              <span>Monthly writing and photography challenges</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#A855F7] mr-2">✦</span>
+              <span>Featured in LPU's annual literary fest</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#A855F7] mr-2">✦</span>
+              <span>Print anthology published annually</span>
+            </li>
+          </ul>
+          <div class="flex items-center gap-4">
+            <a href="#" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
+              Read Our Stories <span class="ml-2">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunshine -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-10">
+        <div class="md:w-1/2">
+          <img src="../src/SUNSINELOGO.png" alt="Sunshine Social" class="w-full floating">
+        </div>
+        <div class="md:w-1/2">
+          <div
+            class="inline-block px-4 py-1 bg-[#FBBF24]/50 rounded-full text-sm font-medium mb-4 border border-[#FBBF24]/30">
+            ❤️ Social Initiative
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <h3 class="font-bold text-white text-3xl">Sunshine</h3>
+            <a href="https://instagram.com/sunshine" target="_blank"
+              class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
+              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+            </a>
+          </div>
+          <p class="text-[#9CA3AF] mb-6">
+            Our mission to spread light across communities. Through 15+ campaigns across 8 states,
+            we've impacted 5,000+ lives through education, healthcare, and basic needs initiatives.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <span class="text-[#FBBF24] mr-2">✦</span>
+              <span>Recognized by Maya Kaushalya Foundation</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#FBBF24] mr-2">✦</span>
+              <span>Annual hair donation drive for cancer patients</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-[#FBBF24] mr-2">✦</span>
+              <span>Education camps in rural areas</span>
+            </li>
+          </ul>
+          <div class="flex items-center gap-4">
+            <a href="#" class="inline-flex items-center text-[#FBBF24] hover:text-[#F59E0B] font-medium">
+              Join Our Mission <span class="ml-2">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section (z-index: 10, relative) -->
+  <section id="team" class="px-6 md:px-16 py-20 relative z-10">
+    <div class="max-w-4xl mx-auto text-center mb-16">
+      <h2 class="font-extrabold text-white mb-4 text-3xl md:text-4xl">
+        <span class="bg-gradient-to-r from-[#A855F7] to-[#3B82F6] bg-clip-text text-transparent">Meet Our Cosmic
+          Crew</span>
+      </h2>
+      <p class="text-lg text-[#9CA3AF] max-w-2xl mx-auto">
+        The brilliant minds navigating Gravity through the student organization universe
+      </p>
+    </div>
+
+    <!-- Leadership Team (Always Visible) -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
+      <!-- CEO -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#6B21A8]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#3B82F6] overflow-hidden border-2 border-[#6B21A8]/30">
+          <img src="https://via.placeholder.com/200?text=CEO" alt="CEO" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Vemula Venkata Pardhu</h3>
+        <p class="text-[#A855F7] mb-3">Chief Executive Officer</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Visionary leader steering Gravity to new heights
+        </p>
+      </div>
+
+      <!-- Co-CEO -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#2563EB]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] overflow-hidden border-2 border-[#2563EB]/30">
+          <img src="https://via.placeholder.com/200?text=Co-CEO" alt="Co-CEO" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Tangudu Adarsh</h3>
+        <p class="text-[#3B82F6] mb-3">Co-Chief Executive Officer</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Supporting the CEO in strategic decision making
+        </p>
+      </div>
+
+      <!-- CTO -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#6B21A8]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#F472B6] overflow-hidden border-2 border-[#6B21A8]/30">
+          <img src="https://via.placeholder.com/200?text=CTO" alt="CTO" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Himanshu Kumar</h3>
+        <p class="text-[#F472B6] mb-3">Chief Technical Officer</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Oversees all technical operations and initiatives
+        </p>
+      </div>
+
+      <!-- Technical Lead -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#DB2777]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#DB2777] to-[#F472B6] overflow-hidden border-2 border-[#DB2777]/30">
+          <img src="https://via.placeholder.com/200?text=Tech+Lead" alt="Tech Lead" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Sri Narendra</h3>
+        <p class="text-[#DB2777] mb-3">Lead Technical</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Leads technical projects and team development
+        </p>
+      </div>
+    </div>
+
+    <!-- Extended Team (Initially Hidden) -->
+    <div id="extendedTeam" style="display: none;"
+      class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <!-- HR -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#FBBF24]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#FBBF24] to-[#F59E0B] overflow-hidden border-2 border-[#FBBF24]/30">
+          <img src="https://via.placeholder.com/200?text=HR" alt="HR" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Vidya Gogikar</h3>
+        <p class="text-[#FBBF24] mb-3">Founder & Human Resource</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Manages team resources and organizational development
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#10B981]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#10B981] to-[#059669] overflow-hidden border-2 border-[#10B981]/30">
+          <img src="https://via.placeholder.com/200?text=HR" alt="HR" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Manjusha.P</h3>
+        <p class="text-[#10B981] mb-3">Human Resource</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Supports HR functions and team coordination
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#4F46E5]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#3B82F6] overflow-hidden border-2 border-[#4F46E5]/30">
+          <img src="https://via.placeholder.com/200?text=Hospitality" alt="Hospitality"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Sudarshan Kumar</h3>
+        <p class="text-[#4F46E5] mb-3">Hospitality</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Manages event hospitality and guest relations
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#14B8A6]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#14B8A6] to-[#10B981] overflow-hidden border-2 border-[#14B8A6]/30">
+          <img src="https://via.placeholder.com/200?text=Design" alt="Design" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Radhavaram Rohan</h3>
+        <p class="text-[#14B8A6] mb-3">Lead Graphic Designing</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Oversees all visual design and branding
+        </p>
+      </div>
+
+      <!-- Third Row -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#6B21A8]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#3B82F6] overflow-hidden border-2 border-[#6B21A8]/30">
+          <img src="https://via.placeholder.com/200?text=Events" alt="Events" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Vamsi</h3>
+        <p class="text-[#A855F7] mb-3">Lead Event Management</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Plans and executes all major events
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#2563EB]/30 text-center">
+        <div кашары w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#7C3AED] overflow-hidden
+          border-2 border-[#2563EB]/30">
+          <img src="https://via.placeholder.com/200?text=Events" alt="Events" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Gulshan Kumar Jha</h3>
+        <p class="text-[#3B82F6] mb-3">Co-lead Event Management</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Supports event planning and execution
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#F472B6]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F472B6] to-[#DB2777] overflow-hidden border-2 border-[#F472B6]/30">
+          <img src="https://via.placeholder.com/200?text=Marketing" alt="Marketing" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Satyam Khokhar</h3>
+        <p class="text-[#F472B6] mb-3">Lead Marketing and Sponsorship</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Drives marketing strategies and sponsor relations
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#FBBF24]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#FBBF24] to-[#F59E0B] overflow-hidden border-2 border-[#FBBF24]/30">
+          <img src="https://via.placeholder.com/200?text=Marketing" alt="Marketing" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Karthik Yernana</h3>
+        <p class="text-[#FBBF24] mb-3">Co-lead Marketing and Sponsorship</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Assists in marketing and sponsorship efforts
+        </p>
+      </div>
+
+      <!-- Fourth Row -->
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#10B981]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#10B981] to-[#059669] overflow-hidden border-2 border-[#10B981]/30">
+          <img src="https://via.placeholder.com/200?text=Speaking" alt="Speaking" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Somya Kashyap</h3>
+        <p class="text-[#10B981] mb-3">Lead Public Speaking</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Leads public speaking initiatives and training
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#DB2777]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#DB2777] to-[#F472B6] overflow-hidden border-2 border-[#DB2777]/30">
+          <img src="https://via.placeholder.com/200?text=Content" alt="Content" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">Parth Bhole</h3>
+        <p class="text-[#DB2777] mb-3">Lead Content Writing</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Oversees all content creation and strategy
+        </p>
+      </div>
+
+      <div class="bg-[#000000]/70 p-6 rounded-xl border border-[#4F46E5]/30 text-center">
+        <div
+          class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#3B82F6] overflow-hidden border-2 border-[#4F46E5]/30">
+          <img src="https://via.placeholder.com/200?text=Photography" alt="Photography"
+            class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-bold text-xl mb-1 text-white">David.P</h3>
+        <p class="text-[#4F46E5] mb-3">Lead Photography</p>
+        <p class="text-[#9CA3AF] text-sm">
+          Manages all photography and visual documentation
+        </p>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <button id="toggleTeamBtn"
+        class="inline-flex items-center px-6 py-3 border border-[#6B21A8] text-[#A855F7] rounded-lg font-medium hover:bg-[#6B21A8]/30 transition">
+        View Full Team <span class="ml-2">→</span>
+      </button>
+    </div>
+
+    <script>
+      // Simple vanilla JavaScript toggle
+      document.getElementById('toggleTeamBtn').addEventListener('click', function () {
+        var extendedTeam = document.getElementById('extendedTeam');
+        var toggleBtn = document.getElementById('toggleTeamBtn');
+
+        if (extendedTeam.style.display === 'none') {
+          extendedTeam.style.display = 'grid';
+          toggleBtn.innerHTML = 'Hide Full Team <span class="ml-2">↑</span>';
+        } else {
+          extendedTeam.style.display = 'none';
+          toggleBtn.innerHTML = 'View Full Team <span class="ml-2">→</span>';
+        }
+      });
+    </script>
+  </section>
+
+  <!-- Footer (z-index: 10, relative) -->
+  <footer class="bg-[#000000] relative z-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-12 grid md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center mb-4">
+          <img src="../src/mainlogo.png" alt="Gravity Logo" class="flex items-center justify-center h-20 w-auto mr-3">
+        </div>
+        <p class="text-[#9CA3AF] mb-4">
+          Student Organization at Lovely Professional University since 2019
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg text-white mb-4">Quick Links</h3>
+        <ul class="space-y-3">
+          <li><a href="index.html" class="text-[#9CA3AF] hover:text-[#A855F7]">Home</a></li>
+          <li><a href="gallery.html" class="text-[#9CA3AF] hover:text-[#A855F7]">Gallery</a></li>
+          <li><a href="#contactus" class="text-[#9CA3AF] hover:text-[#A855F7]">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg text-white mb-4">Events</h3>
+        <ul class="space-y-3">
+          <li><a href="ongoing.html" class="text-[#9CA3AF] hover:text-[#3B82F6]">Ongoing Events</a></li>
+          <li><a href="upcoming.html" class="text-[#9CA3AF] hover:text-[#3B82F6]">Upcoming Events</a></li>
+          <li><a href="archive.html" class="text-[#9CA3AF] hover:text-[#3B82F6]">Event Archive</a></li>
+          <li><a href="#" class="text-[#9CA3AF] hover:text-[#3B82F6]">Submit Proposal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg text-white mb-4">Contact</h3>
+        <ul class="space-y-3">
+          <li class="text-[#9CA3AF]">gravitylpuofficial@gmail.com</li>
+          <li class="text-[#9CA3AF]">Lovely Professional University</li>
+          <li class="text-[#9CA3AF]">Phagwara, Punjab 144411</li>
+          <li>
+            <a href="login.html" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
+              Member Login <span class="ml-2">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[#1A0B3A]/50 py-6">
+      <div class="max-w-7xl mx-auto px-6 md:px-16 text-center text-[#9CA3AF] text-sm">
+        © 2023 Gravity Club. All rights reserved. |
+        <a href="#" class="hover:text-[#A855F7]">Privacy Policy</a> |
+        <a href="#" class="hover:text-[#A855F7]">Terms of Service</a>
+      </div>
+    </div>
+
+    <div class="relative">
+      <a href="mailto:srinarendraofficial@gmail.com"
+        class="absolute bottom-1 right-1 text-[#9CA3AF] text-xs opacity-30 hover:opacity-100 transition-opacity">
+        MADE BY SRI
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Animate sections when they come into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+
+</html>
