@@ -68,76 +68,106 @@ body {
   <!-- Navbar (z-index: 50) -->
   <nav class="bg-[#000000]/70 backdrop-blur-md sticky top-0 z-50 border-b border-[#6B21A8]/50 w-full">
     <div class="w-full px-4 py-3 flex justify-between items-center">
+      <!-- Logo -->
       <div class="flex-shrink-0">
-        <img src="../src/Images/mainlogo.png" alt="Gravity Logo"
-          class="h-16 w-auto hover:scale-105 transition-transform duration-300">
+        <img src="../src/mainlogo.png" alt="Gravity Logo"
+             class="h-16 w-auto hover:scale-105 transition-transform duration-300">
       </div>
-      <div class="flex items-center">
-        <ul class="hidden md:flex items-center gap-4 font-medium text-white mr-4">
-          <li><a href="index.html"
-              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Home</a>
-          </li>
-          <li class="relative group">
-            <a href="#events"
-              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 flex items-center relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">
-              Events <span class="ml-1 transform group-hover:rotate-180 transition duration-200">▼</span>
-            </a>
-            <ul
-              class="absolute left-0 mt-2 w-48 bg-[#000000]/95 rounded-lg shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-[#6B21A8]/30">
-              <li><a href="ongoing.html"
-                  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Ongoing</a></li>
-              <li><a href="upcoming.html"
-                  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Upcoming</a>
-              </li>
-              <li><a href="archive.html"
-                  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Archive</a></li>
-            </ul>
-          </li>
-          <li><a href="team.html"
-              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Team</a>
-          </li>
-          <li><a href="gallery.html"
-              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Gallery</a>
-          </li>
-          <li><a href="about.html"
-              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">About</a>
-          </li>
-          <li><a href="contact.html"
-              class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Contact
-              Us</a></li>
-        </ul>
-        <div class="flex items-center gap-3">
-          <a href="login.html"
-            class="hidden md:block px-4 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium text-white hover:from-[#6D28D9] hover:to-[#2563EB] transition-all duration-300 hover:shadow-lg hover:shadow-[#7C3AED]/20 relative overflow-hidden group">
-            <span
-              class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span class="relative">Login/Signup</span>
+
+      <!-- Desktop Links -->
+      <ul class="hidden md:flex items-center gap-4 font-medium text-white mr-4">
+        <li><a href="index.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300
+             relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+             after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Home</a>
+        </li>
+        <li class="relative group">
+          <a href="#events" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 flex items-center
+             relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+             after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">
+            Events <span class="ml-1 transform group-hover:rotate-180 transition duration-200">▼</span>
           </a>
-          <button class="md:hidden text-2xl text-white hover:text-[#A855F7] transition-colors duration-200"
-            onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
-        </div>
+          <ul class="absolute left-0 mt-2 w-48 bg-[#000000]/95 rounded-lg shadow-lg py-1
+                     opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                     transition-all duration-300 border border-[#6B21A8]/30">
+            <li><a href="ongoing.html" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Ongoing</a></li>
+            <li><a href="upcoming.html" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Upcoming</a></li>
+            <li><a href="archive.html"  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Archive</a></li>
+          </ul>
+        </li>
+        <li><a href="team.html"    class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">Team</a></li>
+        <li><a href="gallery.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">Gallery</a></li>
+        <li><a href="about.html"   class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">About</a></li>
+        <li><a href="contact.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">Contact Us</a></li>
+      </ul>
+
+      <!-- Right-side Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Desktop Login (shown when loggedOut) -->
+        <a href="/login"
+           class="js-login-btn hidden md:block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                  rounded-lg font-medium text-white hover:shadow-lg hover:shadow-[#7C3AED]/20
+                  transition duration-300">
+          Login/Signup
+        </a>
+
+        <!-- Profile Icon (shown when loggedIn) -->
+        <a id="profileIcon" href="/profile"
+           class="js-profile-icon hidden md:block ml-6">
+          <img src="/images/user-icon.png" alt="Profile" class="w-8 h-8 rounded-full">
+        </a>
+
+        <!-- Logout (shown when loggedIn) -->
+        <a href="/logout"
+           class="js-logout-btn block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                  rounded-lg font-medium text-white hover:shadow-lg hover:shadow-[#7C3AED]/20
+                  transition duration-300">
+          Logout
+        </a>
+
+        <!-- Mobile menu toggle -->
+        <button class="md:hidden text-2xl text-white hover:text-[#A855F7] transition-colors duration-200"
+                onclick="toggleMenu()" aria-label="Toggle menu">
+          ☰
+        </button>
       </div>
     </div>
+
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#000000]/95 px-5 py-3 space-y-3 font-medium">
       <a href="index.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Home</a>
       <div class="px-3 py-2">
         <div class="flex items-center text-white mb-1">Events</div>
         <div class="ml-4 space-y-2 mt-2">
-          <a href="ongoing.html"
-            class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Ongoing</a>
-          <a href="upcoming.html"
-            class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Upcoming</a>
-          <a href="archive.html"
-            class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Archive</a>
+          <a href="ongoing.html"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Ongoing</a>
+          <a href="upcoming.html" class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Upcoming</a>
+          <a href="archive.html"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Archive</a>
         </div>
       </div>
-      <a href="team.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Team</a>
+      <a href="team.html"    class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Team</a>
       <a href="gallery.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Gallery</a>
-      <a href="about.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">About</a>
+      <a href="about.html"   class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">About</a>
       <a href="contact.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Contact Us</a>
-      <a href="login.html"
-        class="block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium mt-2 text-center hover:shadow-lg hover:shadow-[#7C3AED]/20 transition duration-300">Login/Signup</a>
+
+      <!-- Mobile Login (when loggedOut) -->
+      <a id="loginBtn" href="/login"
+         class="js-login-btn block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                rounded-lg font-medium text-white hover:shadow-lg hover:shadow-[#7C3AED]/20
+                transition duration-300">
+        Login/Signup
+      </a>
+
+      <!-- Mobile Profile Icon (when loggedIn) -->
+      <a id="profileIconMobile" href="/profile" class="js-profile-icon" style="display: none;">
+        <img src="/images/user-icon.png" alt="Profile" class="w-8 h-8 rounded-full mt-2">
+      </a>
     </div>
   </nav>
 
@@ -307,25 +337,24 @@ body {
 
   <!-- Scripts -->
   <script>
-    // Mobile Menu Toggle
-    function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    }
+  window.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const { loggedIn } = await fetch("/session-info").then(r => r.json());
 
-    // Animate sections when they come into view
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fadeIn');
-        }
+      document.querySelectorAll(".js-login-btn").forEach(el => {
+        el.style.display = loggedIn ? "none" : "";
       });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
-    });
-  </script>
+      document.querySelectorAll(".js-profile-icon").forEach(el => {
+        el.style.display = loggedIn ? "" : "none";
+      });
+      document.querySelectorAll(".js-logout-btn").forEach(el => {
+        el.style.display = loggedIn ? "" : "none";
+      });
+    } catch (err) {
+      console.error("Error fetching session info:", err);
+    }
+  });
+</script>
 </body>
 
 </html>

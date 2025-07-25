@@ -1,33 +1,35 @@
-// ✅ reg_router.js
-import express from 'express'
-import {User} from '../models/user.models.js'
+import express from 'express';
+import { User } from '../models/user.models.js';
 
-const reg_router = express.Router()
+const reg_router = express.Router();
 
 reg_router.post('/register', async (req, res) => {
   try {
-    const { name, email, reg_no, phone_no, academic_year, password } = req.body
+    const { name, email, reg_no, phone_no, academic_year, password } = req.body;
 
     if (!name || !email || !reg_no || !phone_no || !academic_year || !password) {
-      return res.status(401).send("Fill all fields")
+      req.session.toast = "All fields are required";
+      return res.redirect('/register');
     }
 
-    console.log("reg details: ", req.body)
+    console.log("reg details: ", req.body);
 
-    const existingUser = await User.findOne({ reg_no })
-
-    if (existingUser) {
-      console.log("User already exists, please sign in")
-      return res.status(401).send(`User already exists with reg no ${reg_no}, please log in`)
+    const existingUserwithreg_no = await User.findOne({ reg_no  });
+    const existingUserwithemail=await User.findOne({email})
+    if (existingUserwithreg_no || existingUserwithemail) {
+      req.session.toast = `User already exists with reg no ${reg_no}, or with ${email} please log in`;
+      return res.redirect('/login');
     }
 
-    await User.create({ name, email, reg_no, phone_no, academic_year, password })
-    res.send('Registration successful!')
+    await User.create({ name, email, reg_no, phone_no, academic_year, password });
+    req.session.toast = "Registration successful! Please log in.";
+    return res.redirect('/login');
 
   } catch (error) {
-    console.log("Error registering user:", error)
-    res.status(401).send("Error registering user")
+    console.log("Error registering user:", error);
+    req.session.toast = "Error registering user";
+    return res.redirect('/register');
   }
-})
+});
 
-export default reg_router
+export default reg_router;
