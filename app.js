@@ -7,6 +7,9 @@ import dotenv from 'dotenv';
 import reg_router from './src/routers/reg_router.js'; 
 import login_router from './src/routers/login_router.js';
 import logout_router from './src/routers/logout_router.js';
+import verifyotp_router from './src/routers/verifyotp_router.js';
+import forgotpassword_router from './src/routers/forgotpassword_router.js';
+import newpassword_router from './src/routers/newpassword_router.js';
 dotenv.config();
 
 const app = express();
@@ -30,6 +33,9 @@ app.use(session({
 app.use(reg_router);
 app.use(login_router);
 app.use(logout_router);
+app.use(forgotpassword_router)
+app.use(verifyotp_router)
+app.use(newpassword_router)
 // Serve static files
 app.use(express.static(path.join(__dirname, 'pages')));
 
@@ -45,10 +51,19 @@ app.get('/index', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'login.html'));
 });
+app.get('/forgotpassword', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pages', 'forgotpassword.html'));
+});
+
+app.get('/verifyotp', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pages', 'verifyotp.html'));
+});
+app.get('/newpassword',(req,res)=>{
+  res.sendFile(path.join(__dirname, 'pages', 'newpassword.html'));
+})
 app.get('/session-info', (req, res) => {
   const toast = req.session.toast;
   delete req.session.toast;
-
   if (req.session && req.session.user) {
     return res.json({ loggedIn: true, user: req.session.user, toast });
   } else {

@@ -7,8 +7,6 @@ const login_router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const pagesPath = path.join(__dirname, '..', '..', 'pages', 'index.html');
-
 login_router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
