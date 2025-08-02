@@ -54,7 +54,7 @@
 }
 
 body {
-  background-image: url('../src/spacebackground.png');
+  background-image: url('Images/spacebackground.png');
   background-size: auto 100%; /* Maintain full height but allow horizontal scrolling */
   background-position: center;
   background-attachment: fixed;
@@ -63,7 +63,53 @@ body {
   min-height: 100vh; /* Ensure body covers full viewport height */
   margin: 0; /* Remove default margin */
 }
+  .js-login-btn, .js-profile-icon, .js-logout-btn {
+    display: none !important;
+  }
   </style>
+
+   <script>
+  window.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const { loggedIn } = await fetch("/session-info").then(r => r.json());
+
+document.querySelectorAll(".js-login-btn").forEach(el => {
+  el.style.setProperty("display", loggedIn ? "none" : "block", "important");
+});
+
+document.querySelectorAll(".js-profile-icon").forEach(el => {
+  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
+});
+
+document.querySelectorAll(".js-logout-btn").forEach(el => {
+  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
+});
+
+    } catch (err) {
+      console.error(err);
+    }
+  });
+</script>
+ <script>
+  window.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const res = await fetch("/session-info");
+      const data = await res.json();
+
+      if (data.loggedIn && data.user && data.user.name) {
+        const name = data.user.name.trim();
+        const nameParts = name.split(" ");
+        let initials = nameParts[0][0];
+        if (nameParts.length > 1) initials += nameParts[nameParts.length - 1][0];
+
+        document.getElementById("profileInitials").textContent = initials.toUpperCase();
+        document.querySelector(".js-profile-icon").classList.remove("hidden");
+      }
+    } catch (err) {
+      console.error("Error fetching session info", err);
+    }
+  });
+</script>
 </head>
 
 <body class="bg-[#000000] text-[#D4D4D8] relative overflow-x-hidden">
@@ -72,7 +118,7 @@ body {
     <div class="w-full px-4 py-3 flex justify-between items-center">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <img src="../src/mainlogo.png" alt="Gravity Logo"
+        <img src="Images/mainlogo.png" alt="Gravity Logo"
              class="h-16 w-auto hover:scale-105 transition-transform duration-300">
       </div>
 
@@ -121,10 +167,11 @@ body {
         </a>
 
         <!-- Profile Icon (shown when loggedIn) -->
-        <a id="profileIcon" href="/profile"
-           class="js-profile-icon hidden md:block ml-6">
-          <img src="/images/user-icon.png" alt="Profile" class="w-8 h-8 rounded-full">
-        </a>
+      <a id="profileIcon" href="/profile" class="js-profile-icon hidden md:block ml-6">
+  <div id="profileInitials" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">
+    <!-- Initials will go here -->
+  </div>
+</a>
 
         <!-- Logout (shown when loggedIn) -->
         <a href="/logout"
@@ -192,7 +239,7 @@ body {
       </div>
     </div>
     <div class="md:w-1/2 flex justify-center floating">
-      <img src="../src/mainlogo.png" alt="Gravity Spaceship" class="w-full max-w-md">
+      <img src="Images/mainlogo.png" alt="Gravity Spaceship" class="w-full max-w-md">
     </div>
   </section>
 
@@ -236,7 +283,7 @@ body {
       <!-- Gravity Originals -->
       <div class="flex flex-col md:flex-row items-center gap-10">
         <div class="md:w-1/2">
-          <img src="../src/goriginals.png" alt="Gravity Originals" class="w-full floating">
+          <img src="Images/goriginals.png" alt="Gravity Originals" class="w-full floating">
         </div>
         <div class="md:w-1/2">
           <div
@@ -247,7 +294,7 @@ body {
             <h3 class="font-bold text-white text-3xl">Gravity Originals</h3>
             <a href="https://instagram.com/gravityoriginals" target="_blank"
               class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
-              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+              <img src="Images/instagram.png" alt="instagram" class="h-6 w-6">
             </a>
           </div>
           <p class="text-[#9CA3AF] mb-6">
@@ -280,7 +327,7 @@ body {
       <!-- Gravity Talks -->
       <div class="flex flex-col md:flex-row-reverse items-center gap-10">
         <div class="md:w-1/2">
-          <img src="../src/gtalkslogo.png" alt="Gravity Talks" class="w-full floating">
+          <img src="Images/gtalkslogo.png" alt="Gravity Talks" class="w-full floating">
         </div>
         <div class="md:w-1/2">
           <div
@@ -291,7 +338,7 @@ body {
             <h3 class="font-bold text-white text-3xl">Gravity Talks</h3>
             <a href="https://instagram.com/gravitytalks" target="_blank"
               class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
-              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+              <img src="Images/instagram.png" alt="instagram" class="h-6 w-6">
             </a>
           </div>
           <p class="text-[#9CA3AF] mb-6">
@@ -323,7 +370,7 @@ body {
       <!-- G-Blogs -->
       <div class="flex flex-col md:flex-row items-center gap-10">
         <div class="md:w-1/2">
-          <img src="../src/blogs.png" alt="Gravity Blogs" class="w-full floating">
+          <img src="Images/blogs.png" alt="Gravity Blogs" class="w-full floating">
         </div>
         <div class="md:w-1/2">
           <div
@@ -334,7 +381,7 @@ body {
             <h3 class="font-bold text-white text-3xl">G-Blogs</h3>
             <a href="https://instagram.com/gblogs" target="_blank"
               class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
-              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+              <img src="Images/instagram.png" alt="instagram" class="h-6 w-6">
             </a>
           </div>
           <p class="text-[#9CA3AF] mb-6">
@@ -366,7 +413,7 @@ body {
       <!-- Sunshine -->
       <div class="flex flex-col md:flex-row-reverse items-center gap-10">
         <div class="md:w-1/2">
-          <img src="../src/SUNSINELOGO.png" alt="Sunshine Social" class="w-full floating">
+          <img src="Images/SUNSINELOGO.png" alt="Sunshine Social" class="w-full floating">
         </div>
         <div class="md:w-1/2">
           <div
@@ -377,7 +424,7 @@ body {
             <h3 class="font-bold text-white text-3xl">Sunshine</h3>
             <a href="https://instagram.com/sunshine" target="_blank"
               class="text-[#F472B6] hover:text-[#DB2777] transition-colors" title="Instagram">
-              <img src="../src/instagram.png" alt="instagram" class="h-6 w-6">
+              <img src="Images/instagram.png" alt="instagram" class="h-6 w-6">
             </a>
           </div>
           <p class="text-[#9CA3AF] mb-6">
@@ -748,25 +795,6 @@ body {
 </script>
 </script>
 
-<script>
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const { loggedIn } = await fetch("/session-info").then(r => r.json());
-
-      document.querySelectorAll(".js-login-btn").forEach(el => {
-        el.style.display = loggedIn ? "none" : "";
-      });
-      document.querySelectorAll(".js-profile-icon").forEach(el => {
-        el.style.display = loggedIn ? "" : "none";
-      });
-         document.querySelectorAll(".js-logout-btn").forEach(el => {
-        el.style.display = loggedIn ? "" : "none";
-      });
-    } catch (err) {
-      console.error("Error fetching session info:", err);
-    }
-  });
-</script>
 
 <script>
   fetch('/session-info')

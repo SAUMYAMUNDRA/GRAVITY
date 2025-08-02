@@ -35,26 +35,24 @@ app.use(login_router);
 app.use(logout_router);
 app.use(forgotpassword_router)
 app.use(verifyotp_router)
+app.get(login_router)
 app.use(newpassword_router)
 // Serve static files
-app.use(express.static(path.join(__dirname, 'pages')));
 
+app.use(express.static(path.join(__dirname, 'pages')));
 // HTML page routes
-app.get('/register', (req, res) => {
+ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'login.html'));
 });
-
 app.get('/index', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'index.html'));
 });
-
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'login.html'));
 });
 app.get('/forgotpassword', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'forgotpassword.html'));
 });
-
 app.get('/verifyotp', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages', 'verifyotp.html'));
 });
@@ -65,6 +63,7 @@ app.get('/session-info', (req, res) => {
   const toast = req.session.toast;
   delete req.session.toast;
   if (req.session && req.session.user) {
+    
     return res.json({ loggedIn: true, user: req.session.user, toast });
   } else {
     return res.json({ loggedIn: false, toast });
@@ -86,3 +85,7 @@ const startServer = async () => {
 };
 
 startServer();
+
+
+
+
