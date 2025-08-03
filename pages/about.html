@@ -384,6 +384,23 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
   </footer>
 
   <!-- Scripts -->
+    <script>
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Animate sections when they come into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
+  </script>
 </body>
 
 </html>
