@@ -61,6 +61,8 @@ app.get('/newpassword',(req,res)=>{
 })
 app.get('/session-info', (req, res) => {
   const toast = req.session.toast;
+  console.log("session toast value:",toast);
+  
   delete req.session.toast;
   if (req.session && req.session.user) {
     
