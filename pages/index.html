@@ -67,46 +67,44 @@ body {
     display: none !important;
   }
   </style>
-
-   <script>
+<script>
   window.addEventListener("DOMContentLoaded", async () => {
     try {
-      const { loggedIn } = await fetch("/session-info").then(r => r.json());
+      // 1️⃣ Fetch session info once
+      const { loggedIn, user, toast } = await fetch("/session-info").then(r => r.json());
 
-document.querySelectorAll(".js-login-btn").forEach(el => {
-  el.style.setProperty("display", loggedIn ? "none" : "block", "important");
-});
+      // 2️⃣ Toggle login/profile/logout buttons
+      document.querySelectorAll(".js-login-btn")
+        .forEach(el => el.style.setProperty("display", loggedIn ? "none" : "block", "important"));
+      document.querySelectorAll(".js-profile-icon")
+        .forEach(el => el.style.setProperty("display", loggedIn ? "block" : "none", "important"));
+      document.querySelectorAll(".js-logout-btn")
+        .forEach(el => el.style.setProperty("display", loggedIn ? "block" : "none", "important"));
 
-document.querySelectorAll(".js-profile-icon").forEach(el => {
-  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
-});
+      // 3️⃣ Show toast if present
+      if (toast) {
+        Toastify({
+          text: toast,
+          duration: 3000,
+          gravity: "top",
+          position: "center",
+          style: {
+            background: "linear-gradient(to right, #7C3AED, #3B82F6)",
+            color: "#fff"
+          }
+        }).showToast();
+      }
 
-document.querySelectorAll(".js-logout-btn").forEach(el => {
-  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
-});
-
-    } catch (err) {
-      console.error(err);
-    }
-  });
-</script>
- <script>
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const res = await fetch("/session-info");
-      const data = await res.json();
-
-      if (data.loggedIn && data.user && data.user.name) {
-        const name = data.user.name.trim();
-        const nameParts = name.split(" ");
-        let initials = nameParts[0][0];
-        if (nameParts.length > 1) initials += nameParts[nameParts.length - 1][0];
-
-        document.getElementById("profileInitials").textContent = initials.toUpperCase();
-        document.querySelector(".js-profile-icon").classList.remove("hidden");
+      // 4️⃣ If logged in, compute & inject profile initials
+      if (loggedIn && user?.name) {
+        const parts = user.name.trim().split(" ");
+        let initials = parts[0][0];
+        if (parts.length > 1) initials += parts[parts.length - 1][0];
+        const el = document.getElementById("profileInitials");
+        if (el) el.textContent = initials.toUpperCase();
       }
     } catch (err) {
-      console.error("Error fetching session info", err);
+      console.error("Error fetching session-info:", err);
     }
   });
 </script>
@@ -317,9 +315,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
             </li>
           </ul>
           <div class="flex items-center gap-4">
-            <a href="#" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
-              Explore Episodes <span class="ml-2">→</span>
-            </a>
+          
           </div>
         </div>
       </div>
@@ -360,9 +356,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
             </li>
           </ul>
           <div class="flex items-center gap-4">
-            <a href="#" class="inline-flex items-center text-[#3B82F6] hover:text-[#2563EB] font-medium">
-              View Past Talks <span class="ml-2">→</span>
-            </a>
+            
           </div>
         </div>
       </div>
@@ -403,9 +397,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
             </li>
           </ul>
           <div class="flex items-center gap-4">
-            <a href="#" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
-              Read Our Stories <span class="ml-2">→</span>
-            </a>
+           
           </div>
         </div>
       </div>
@@ -446,9 +438,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
             </li>
           </ul>
           <div class="flex items-center gap-4">
-            <a href="#" class="inline-flex items-center text-[#FBBF24] hover:text-[#F59E0B] font-medium">
-              Join Our Mission <span class="ml-2">→</span>
-            </a>
+           
           </div>
         </div>
       </div>
@@ -494,9 +484,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
           <li class="text-[#9CA3AF]">Lovely Professional University</li>
           <li class="text-[#9CA3AF]">Phagwara, Punjab 144411</li>
           <li>
-            <a href="login.html" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
-              Member Login <span class="ml-2">→</span>
-            </a>
+           
           </li>
         </ul>
       </div>
@@ -539,29 +527,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
       observer.observe(section);
     });
   </script>
-<script>
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const res = await fetch("/session-info");
-      const data = await res.json();
 
-      if (data.toast) {
-        Toastify({
-          text: data.toast,
-          duration: 3000,
-          gravity: "top",
-          position: "center",
-          style: {
-            background: "linear-gradient(to right, #7C3AED, #3B82F6)",
-            color: "#fff"
-          }
-        }).showToast();
-      }
-    } catch (err) {
-      console.error("Error fetching session-info:", err);
-    }
-  });
-</script>
 </script>
 
 

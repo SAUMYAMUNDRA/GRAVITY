@@ -9,8 +9,10 @@ logout_router.get('/logout', (req, res) => {
       return res.redirect('/?message=' + encodeURIComponent("Logout failed, please try again"));
     }
     // On success, clear the cookie and send back to login
+    
     res.clearCookie('connect.sid');
     res.redirect('/login');
+    
   });
 });
 export default logout_router;

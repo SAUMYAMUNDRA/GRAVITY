@@ -19,6 +19,8 @@ login_router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
+
+      
       req.session.toast = "User not found. Please register first";
       return res.redirect('/login');
     }
@@ -33,6 +35,7 @@ login_router.post('/login', async (req, res) => {
       email: user.email,
       name: user.name,
     };
+    req.session.userId = user._id; 
     req.session.toast = "Logged in successfully";
     return res.redirect('/index');
   } catch (error) {

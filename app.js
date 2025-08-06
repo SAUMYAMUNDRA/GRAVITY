@@ -10,6 +10,9 @@ import logout_router from './src/routers/logout_router.js';
 import verifyotp_router from './src/routers/verifyotp_router.js';
 import forgotpassword_router from './src/routers/forgotpassword_router.js';
 import newpassword_router from './src/routers/newpassword_router.js';
+import updatedashboard_route from './src/routers/updatedashboard.router.js';
+import contactus_router from './src/routers/contactus.router.js';
+import {User} from './src/models/user.models.js';
 dotenv.config();
 
 const app = express();
@@ -37,6 +40,8 @@ app.use(forgotpassword_router)
 app.use(verifyotp_router)
 app.get(login_router)
 app.use(newpassword_router)
+app.use(updatedashboard_route);
+app.use(contactus_router)
 // Serve static files
 
 app.use(express.static(path.join(__dirname, 'pages')));
@@ -72,6 +77,15 @@ app.get('/session-info', (req, res) => {
   }
 });
 app.use(express.static(path.join(__dirname, 'src', 'public')));
+app.get("/api/user-info",async (req,res)=>{
+  try {
+const user = await User.findById(req.session.userId).select("name reg_no email academic_year phone_no");
+        res.json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+})
 // Start server
 const startServer = async () => {
   try {

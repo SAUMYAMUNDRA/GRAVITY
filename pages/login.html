@@ -66,29 +66,39 @@
     display: none !important;
   }
   </style>
+<script>
+window.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // 1️⃣ Fetch once, grabbing both loggedIn and toast
+    const { loggedIn, toast } = await fetch("/session-info").then(r => r.json());
 
-   <script>
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const { loggedIn } = await fetch("/session-info").then(r => r.json());
+    // 2️⃣ Toggle the buttons based on loggedIn
+    document.querySelectorAll(".js-login-btn")
+      .forEach(el => el.style.setProperty("display", loggedIn ? "none" : "block", "important"));
+    document.querySelectorAll(".js-profile-icon")
+      .forEach(el => el.style.setProperty("display", loggedIn ? "block" : "none", "important"));
+    document.querySelectorAll(".js-logout-btn")
+      .forEach(el => el.style.setProperty("display", loggedIn ? "block" : "none", "important"));
 
-document.querySelectorAll(".js-login-btn").forEach(el => {
-  el.style.setProperty("display", loggedIn ? "none" : "block", "important");
-});
-
-document.querySelectorAll(".js-profile-icon").forEach(el => {
-  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
-});
-
-document.querySelectorAll(".js-logout-btn").forEach(el => {
-  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
-});
-
-    } catch (err) {
-      console.error(err);
+    // 3️⃣ Show toast if it exists
+    if (toast) {
+      Toastify({
+        text: toast,
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: "linear-gradient(to right, #7C3AED, #3B82F6)",
+          color: "#fff"
+        }
+      }).showToast();
     }
-  });
+  } catch (err) {
+    console.error("Error fetching session-info:", err);
+  }
+});
 </script>
+
 </head>
 
 <body class="bg-[#000000] text-[#D4D4D8] relative overflow-x-hidden">
@@ -336,9 +346,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
           <li class="text-[#9CA3AF]">Lovely Professional University</li>
           <li class="text-[#9CA3AF]">Phagwara, Punjab 144411</li>
           <li>
-            <a href="login.html" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium">
-              Member Login <span class="ml-2">→</span>
-            </a>
+         
           </li>
         </ul>
       </div>
@@ -398,29 +406,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
       observer.observe(section);
     });
   </script>
- <script>
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const res = await fetch("/session-info");
-      const data = await res.json();
 
-      if (data.toast) {
-        Toastify({
-          text: data.toast,
-          duration: 3000,
-          gravity: "top",
-          position: "center",
-          style: {
-            background: "linear-gradient(to right, #7C3AED, #3B82F6)",
-            color: "#fff"
-          }
-        }).showToast();
-      }
-    } catch (err) {
-      console.error("Error fetching session-info:", err);
-    }
-  });
-</script>
 
 </body>
 
