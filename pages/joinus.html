@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravity Club - Join Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    /* Parallax scrolling background */
+    @keyframes parallaxBackground {
+      0% {
+        background-position-x: 100%;
+      }
+      100% {
+        background-position-x: 0%;
+      }
+    }
+
+    body {
+      background-image: url('Images/spacebackground.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; /* Creates parallax effect */
+      background-repeat: no-repeat;
+      animation: parallaxBackground 60s linear infinite; /* Moves right to left over 60 seconds */
+    }
+    
+    .form-container {
+      width: 66.67%;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    .form-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 32px;
+      border: 1px solid rgba(107, 33, 168, 0.3);
+      animation: fadeIn 1s ease-out forwards;
+    }
+    .form-box h3 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #D4D4D8;
+      margin-bottom: 4px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 16px;
+      background-color: rgba(26, 11, 58, 0.5);
+      border: 1px solid rgba(107, 33, 168, 0.3);
+      border-radius: 8px;
+      color: #D4D4D8;
+      font-size: 16px;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #A855F7;
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+    }
+    .form-group textarea {
+      height: 128px;
+      resize: none;
+    }
+    .submit-button {
+      width: 100%;
+      padding: 12px 24px;
+      background: linear-gradient(to right, #7C3AED, #3B82F6);
+      border: none;
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .submit-button:hover {
+      background: linear-gradient(to right, #6D28D9, #2563EB);
+      box-shadow: 0 0 16px rgba(124, 58, 237, 0.2);
+    }
+    .form-footer {
+      text-align: center;
+      font-size: 14px;
+      color: #9CA3AF;
+      margin-top: 24px;
+    }
+    .form-footer a {
+      color: #A855F7;
+      transition: color 0.3s ease;
+    }
+    .form-footer a:hover {
+      color: #7C3AED;
+    }
+   .js-login-btn, .js-profile-icon, .js-logout-btn {
+    display: none !important;
+  }
+  </style>
+
+   <script>
+  window.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const { loggedIn } = await fetch("/session-info").then(r => r.json());
+
+document.querySelectorAll(".js-login-btn").forEach(el => {
+  el.style.setProperty("display", loggedIn ? "none" : "block", "important");
+});
+
+document.querySelectorAll(".js-profile-icon").forEach(el => {
+  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
+});
+
+document.querySelectorAll(".js-logout-btn").forEach(el => {
+  el.style.setProperty("display", loggedIn ? "block" : "none", "important");
+});
+
+    } catch (err) {
+      console.error(err);
+    }
+  });
+</script>
+  <script>
+  window.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const res = await fetch("/session-info");
+      const data = await res.json();
+
+      if (data.loggedIn && data.user && data.user.name) {
+        const name = data.user.name.trim();
+        const nameParts = name.split(" ");
+        let initials = nameParts[0][0];
+        if (nameParts.length > 1) initials += nameParts[nameParts.length - 1][0];
+
+        document.getElementById("profileInitials").textContent = initials.toUpperCase();
+        document.querySelector(".js-profile-icon").classList.remove("hidden");
+      }
+    } catch (err) {
+      console.error("Error fetching session info", err);
+    }
+  });
+</script>
+</head>
+
+<body class="bg-[#000000] text-[#D4D4D8] relative overflow-x-hidden">
+ <div id="toast" class="hidden fixed top-5 left-1/2 -translate-x-1/2 px-4 py-2 rounded shadow-lg transition-opacity duration-300 z-[9999]">
+  Thank you! Your application has been submitted.
+</div>
+  <!-- Navbar (z-index: 50) -->
+ <nav class="bg-[#000000]/70 backdrop-blur-md sticky top-0 z-50 border-b border-[#6B21A8]/50 w-full">
+    <div class="w-full px-4 py-3 flex justify-between items-center">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <img src="Images/mainlogo.png" alt="Gravity Logo"
+             class="h-16 w-auto hover:scale-105 transition-transform duration-300">
+      </div>
+
+      <!-- Desktop Links -->
+      <ul class="hidden md:flex items-center gap-4 font-medium text-white mr-4">
+        <li><a href="index.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300
+             relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+             after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Home</a>
+        </li>
+        <li class="relative group">
+          <a href="#events" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 flex items-center
+             relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+             after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">
+            Events <span class="ml-1 transform group-hover:rotate-180 transition duration-200">▼</span>
+          </a>
+          <ul class="absolute left-0 mt-2 w-48 bg-[#000000]/95 rounded-lg shadow-lg py-1
+                     opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                     transition-all duration-300 border border-[#6B21A8]/30">
+            <li><a href="ongoing.html" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Ongoing</a></li>
+            <li><a href="upcoming.html" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Upcoming</a></li>
+            <li><a href="archive.html"  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Archive</a></li>
+          </ul>
+        </li>
+        <li><a href="team.html"    class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">Team</a></li>
+        <li><a href="gallery.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">Gallery</a></li>
+        <li><a href="about.html"   class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">About</a></li>
+        <li><a href="contact.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+             after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
+             after:duration-300 hover:after:w-full">Contact Us</a></li>
+      </ul>
+
+      <!-- Right-side Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Desktop Login (shown when loggedOut) -->
+        <a href="/login"
+           class="js-login-btn hidden md:block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                  rounded-lg font-medium text-white hover:shadow-lg hover:shadow-[#7C3AED]/20
+                  transition duration-300">
+          Login/Signup
+        </a>
+
+        <!-- Profile Icon (shown when loggedIn) -->
+        <a id="profileIcon" href="/profile" class="js-profile-icon hidden md:block ml-6">
+  <div id="profileInitials" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">
+    <!-- Initials will go here -->
+  </div>
+</a>
+
+
+        <!-- Logout (shown when loggedIn) -->
+        <a href="/logout"
+           class="js-logout-btn block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                  rounded-lg font-medium text-white hover:shadow-lg hover:shadow-[#7C3AED]/20
+                  transition duration-300">
+          Logout
+        </a>
+
+        <!-- Mobile menu toggle -->
+        <button class="md:hidden text-2xl text-white hover:text-[#A855F7] transition-colors duration-200"
+                onclick="toggleMenu()" aria-label="Toggle menu">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#000000]/95 px-5 py-3 space-y-3 font-medium">
+      <a href="index.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Home</a>
+      <div class="px-3 py-2">
+        <div class="flex items-center text-white mb-1">Events</div>
+        <div class="ml-4 space-y-2 mt-2">
+          <a href="ongoing.html"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Ongoing</a>
+          <a href="upcoming.html" class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Upcoming</a>
+          <a href="archive.html"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Archive</a>
+        </div>
+      </div>
+      <a href="team.html"    class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Team</a>
+      <a href="gallery.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Gallery</a>
+      <a href="about.html"   class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">About</a>
+      <a href="contact.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Contact Us</a>
+
+      <!-- Mobile Login (when loggedOut) -->
+      <a id="loginBtn" href="/login"
+         class="js-login-btn block px-3 py-2 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                rounded-lg font-medium text-white hover:shadow-lg hover:shadow-[#7C3AED]/20
+                transition duration-300">
+        Login/Signup
+      </a>
+
+      <!-- Mobile Profile Icon (when loggedIn) -->
+      <a id="profileIconMobile" href="/profile" class="js-profile-icon" style="display: none;">
+        <img src="/images/user-icon.png" alt="Profile" class="w-8 h-8 rounded-full mt-2">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Join Us Form Section -->
+  <section class="px-6 md:px-16 py-20 relative z-10">
+    <div class="max-w-4xl mx-auto bg-[#000000]/70 backdrop-blur-md rounded-xl p-8 border border-[#6B21A8]/30 animate-fadeIn">
+      <h2 class="font-extrabold text-white mb-6 text-3xl md:text-4xl text-center">
+        <span class="bg-gradient-to-r from-[#A855F7] to-[#3B82F6] bg-clip-text text-transparent">Join Gravity Club</span>
+      </h2>
+      <p class="text-[#9CA3AF] text-center mb-8">Fill out the form below to apply for membership</p>
+
+      <form name="join-form" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" name="Full Name" id="name" placeholder="Enter your full name" required
+              class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="Email" id="email" placeholder="Enter your email" required
+              class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" name="Phone" id="phone" placeholder="Enter your phone number" required
+              class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+          </div>
+          <div class="form-group">
+            <label for="residence">Hostel Number / Day Scholar</label>
+            <input type="text" name="Residence" id="residence" placeholder="Enter hostel number or 'Day Scholar'"
+              class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="form-group">
+            <label for="registration">Registration Number</label>
+            <input type="text" name="Registration Number" id="registration" placeholder="Enter your registration number"
+              class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+          </div>
+          <div class="form-group">
+            <label for="course">Course</label>
+            <input type="text" name="Course" id="course" placeholder="Enter your course (e.g., B.Tech)"
+              class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="department">Department/Role Interest</label>
+          <select id="department" name="Department" required
+            class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300">
+            <option value="" disabled selected>Select a department</option>
+            <option value="Event Management">Event Management</option>
+            <option value="Marketing & Sponsorship">Marketing & Sponsorship</option>
+            <option value="Technical Team">Technical Team</option>
+            <option value="Content Writing">Content Writing</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Hospitality">Hospitality</option>
+            <option value="Public Speaking">Public Speaking</option>
+            <option value="Photography">Photography</option>
+            <option value="Social Initiatives">Social Initiatives</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="experience">Past Experience</label>
+          <textarea id="experience" name="Experience" placeholder="Describe any relevant past experience"
+            class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300 h-32"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Why Join Gravity Club?</label>
+          <textarea id="message" name="Why Join" placeholder="Tell us why you want to join"
+            class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7] transition duration-300 h-32"></textarea>
+        </div>
+        
+        <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium text-white hover:from-[#6D28D9] hover:to-[#2563EB] transition-all duration-300 hover:shadow-lg hover:shadow-[#7C3AED]/20">
+          Submit Application
+        </button>
+        
+        <p class="text-center text-sm text-[#9CA3AF] mt-6">
+          By submitting, you agree to our
+          <a href="#" class="text-[#A855F7] hover:text-[#7C3AED] transition duration-300">Terms of Service</a> and
+          <a href="#" class="text-[#A855F7] hover:text-[#7C3AED] transition duration-300">Privacy Policy</a>.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer (z-index: 10, relative) -->
+  <footer class="bg-[#000000] relative z-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-12 grid md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center mb-4">
+          <img src="Images/mainlogo.png" alt="Gravity Logo" class="flex items-center justify-center h-20 w-auto mr-3">
+        </div>
+        <p class="text-[#9CA3AF] mb-4">
+          Student Organization at Lovely Professional University since 2019
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg text-white mb-4">Quick Links</h3>
+        <ul class="space-y-3">
+          <li><a href="index.html" class="text-[#9CA3AF] hover:text-[#A855F7] transition duration-300">Home</a></li>
+          <li><a href="gallery.html" class="text-[#9CA3AF] hover:text-[#A855F7] transition duration-300">Gallery</a></li>
+          <li><a href="contact.html" class="text-[#9CA3AF] hover:text-[#A855F7] transition duration-300">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg text-white mb-4">Events</h3>
+        <ul class="space-y-3">
+          <li><a href="ongoing.html" class="text-[#9CA3AF] hover:text-[#3B82F6] transition duration-300">Ongoing Events</a></li>
+          <li><a href="upcoming.html" class="text-[#9CA3AF] hover:text-[#3B82F6] transition duration-300">Upcoming Events</a></li>
+          <li><a href="archive.html" class="text-[#9CA3AF] hover:text-[#3B82F6] transition duration-300">Event Archive</a></li>
+          <li><a href="#" class="text-[#9CA3AF] hover:text-[#3B82F6] transition duration-300">Submit Proposal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg text-white mb-4">Contact</h3>
+        <ul class="space-y-3">
+          <li class="text-[#9CA3AF]">gravitylpuofficial@gmail.com</li>
+          <li class="text-[#9CA3AF]">Lovely Professional University</li>
+          <li class="text-[#9CA3AF]">Phagwara, Punjab 144411</li>
+          <li>
+            <a href="login.html" class="inline-flex items-center text-[#A855F7] hover:text-[#7C3AED] font-medium transition duration-300">
+              Member Login <span class="ml-2">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[#1A0B3A]/50 py-6">
+      <div class="max-w-7xl mx-auto px-6 md:px-16 text-center text-[#9CA3AF] text-sm">
+        © 2023 Gravity Club. All rights reserved. |
+        <a href="#" class="hover:text-[#A855F7] transition duration-300">Privacy Policy</a> |
+        <a href="#" class="hover:text-[#A855F7] transition duration-300">Terms of Service</a>
+      </div>
+    </div>
+
+    <div class="relative">
+      <a href="mailto:srinarendraofficial@gmail.com"
+        class="absolute bottom-1 right-1 text-[#9CA3AF] text-xs opacity-30 hover:opacity-100 transition-opacity">
+        MADE BY SRI
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Form Submission
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxYWbb530Sm4_F1YWIfxkLmztKxooSpyHohmdPN8fkrXOwcTubRzsxtFU9lIKqXSRaVxQ/exec';
+    const form = document.forms['join-form'];
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  // Show toast immediately
+  showToast("Submitting your application...", false, true);
+
+  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+    .then(response => {
+      showToast("Thank you! Your application has been submitted.");
+      form.reset();
+    })
+    .catch(error => {
+      console.error('Error!', error.message);
+      showToast("There was a problem submitting your form.", true);
+    });
+});
+
+function showToast(message, isError = false, persistent = false) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.remove('hidden', 'opacity-0');
+  toast.classList.add('opacity-100');
+
+  toast.style.background = isError
+    ? "linear-gradient(to right, #DC2626, #EF4444)"
+    : "linear-gradient(to right, #7C3AED, #3B82F6)";
+  toast.style.color = "#fff";
+
+  // Auto-hide only if not persistent (used for final messages)
+  if (!persistent) {
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0');
+      setTimeout(() => toast.classList.add('hidden'), 300);
+    }, 3000);
+  }
+}
+
+    // Animate sections when they come into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+
+</html>
