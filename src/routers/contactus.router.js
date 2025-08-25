@@ -22,7 +22,7 @@ contactus_router.post("/api/contact", async (req, res) => {
 
     const mailOptions = {
       from: email,
-      to: "mundrasaumya17@gmail.com",
+      to: "gravitytechnicalofficial@gmail.com",
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <p><strong>Name:</strong> ${name}</p>
