@@ -163,7 +163,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
         </a>
 
         <!-- Profile Icon (shown when loggedIn) -->
-        <a id="profileIcon" href="/profile" class="js-profile-icon hidden md:block ml-6">
+        <a id="profileIcon" href="/profile.html" class="js-profile-icon hidden md:block ml-6">
   <div id="profileInitials" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">
     <!-- Initials will go here -->
   </div>
@@ -211,9 +211,7 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
       </a>
 
       <!-- Mobile Profile Icon (when loggedIn) -->
-      <a id="profileIconMobile" href="/profile" class="js-profile-icon" style="display: none;">
-        <img src="/images/user-icon.png" alt="Profile" class="w-8 h-8 rounded-full mt-2">
-      </a>
+     
     </div>
   </nav>
 <!-- Centered Wrapper -->
@@ -271,51 +269,71 @@ document.querySelectorAll(".js-logout-btn").forEach(el => {
   </section>
 </div>
 
-
-  <script>
-    window.addEventListener("DOMContentLoaded", async () => {
-      try {
-        const res = await fetch("/session-info");
-        const data = await res.json();
-
-        if (data.toast) {
-          Toastify({
-            text: data.toast,
-            duration: 3000,
-            gravity: "top",
-            position: "center",
-            style: {
-              background: "linear-gradient(to right, #7C3AED, #3B82F6)",
-              color: "#fff"
-            }
-          }).showToast();
-        }
-      } catch (err) {
-        console.error("Error fetching session-info:", err);
-      }
-    });
-  </script>
-  
 <script>
-  window.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const res = await fetch('/api/user-info');
-      const data = await res.json();
-      console.log(data);
-      
-      if (res.ok) {
-      document.getElementById('name').value = data.name;
-document.getElementById('reg_no').value = data.reg_no;
-document.getElementById('email').value = data.email;
-document.getElementById('phone_no').value = data.phone_no;
-document.getElementById('academic_year').value = data.academic_year;
-      } else {
-        console.error("Error fetching user info", data.error);
-      }
-    } catch (err) {
-      console.error("Fetch failed", err);
+window.addEventListener("DOMContentLoaded", async () => {
+  // 1. Session-info toggle
+  try {
+    const { loggedIn, user } = await fetch("/session-info").then(r => r.json());
+    document.querySelectorAll(".js-login-btn").forEach(el => {
+      el.style.setProperty("display", loggedIn ? "none" : "block", "important");
+    });
+    document.querySelectorAll(".js-profile-icon").forEach(el => {
+      el.style.setProperty("display", loggedIn ? "block" : "none", "important");
+    });
+    document.querySelectorAll(".js-logout-btn").forEach(el => {
+      el.style.setProperty("display", loggedIn ? "block" : "none", "important");
+    });
+    if (user?.name) {
+      const parts = user.name.trim().split(" ");
+      let initials = parts[0][0];
+      if (parts.length > 1) initials += parts[parts.length - 1][0];
+      document.getElementById("profileInitials").textContent = initials.toUpperCase();
     }
-  });
+  } catch (err) {
+    console.error("Error fetching session info", err);
+  }
+
+  // 2. Toast
+  try {
+    const res = await fetch("/session-info");
+    const data = await res.json();
+    if (data.toast) {
+      Toastify({
+        text: data.toast,
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: "linear-gradient(to right, #7C3AED, #3B82F6)",
+          color: "#fff"
+        }
+      }).showToast();
+    }
+  } catch (err) {
+    console.error("Error showing toast", err);
+  }
+
+  // 3. User info
+  try {
+    const res = await fetch("/api/user-info");
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('name').value = data.name;
+      document.getElementById('reg_no').value = data.reg_no;
+      document.getElementById('email').value = data.email;
+      document.getElementById('phone_no').value = data.phone_no;
+      document.getElementById('academic_year').value = data.academic_year;
+    }
+  } catch (err) {
+    console.error("Error fetching user info", err);
+  }
+});
+
+// 4. Keep toggleMenu global so onclick works
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('hidden');
+}
 </script>
 
   
