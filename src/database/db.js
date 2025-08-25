@@ -1,13 +1,17 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const connectDB = async () => {
   try {
-    const conn = await mongoose.connect("mongodb://127.0.0.1:27017/gravity", {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
-
-    console.log(`MongoDB connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.log("✅ Connected to MongoDB Atlas");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err);
     process.exit(1);
   }
 };
