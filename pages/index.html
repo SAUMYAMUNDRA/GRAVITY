@@ -122,7 +122,7 @@ body {
 
       <!-- Desktop Links -->
       <ul class="hidden md:flex items-center gap-4 font-medium text-white mr-4">
-        <li><a href="index.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300
+        <li><a href="index" class="px-3 py-2 hover:text-[#A855F7] transition duration-300
              relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
              after:bg-[#A855F7] after:transition-all after:duration-300 hover:after:w-full">Home</a>
         </li>
@@ -135,21 +135,21 @@ body {
           <ul class="absolute left-0 mt-2 w-48 bg-[#000000]/95 rounded-lg shadow-lg py-1
                      opacity-0 invisible group-hover:opacity-100 group-hover:visible
                      transition-all duration-300 border border-[#6B21A8]/30">
-            <li><a href="ongoing.html" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Ongoing</a></li>
-            <li><a href="upcoming.html" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Upcoming</a></li>
-            <li><a href="archive.html"  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Archive</a></li>
+            <!-- <li><a href="ongoing" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Ongoing</a></li> -->
+            <li><a href="/upcomingevents" class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Upcoming</a></li>
+            <!-- <li><a href="archive"  class="block px-4 py-2 hover:bg-[#6B21A8]/50 hover:pl-6 transition-all duration-200">Archive</a></li> -->
           </ul>
         </li>
-        <li><a href="team.html"    class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+        <li><a href="team"    class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
              after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
              after:duration-300 hover:after:w-full">Team</a></li>
-        <li><a href="gallery.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+        <li><a href="gallery" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
              after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
              after:duration-300 hover:after:w-full">Gallery</a></li>
-        <li><a href="about.html"   class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+        <li><a href="about"   class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
              after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
              after:duration-300 hover:after:w-full">About</a></li>
-        <li><a href="contact.html" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
+        <li><a href="contact" class="px-3 py-2 hover:text-[#A855F7] transition duration-300 relative after:content-['']
              after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#A855F7] after:transition-all
              after:duration-300 hover:after:w-full">Contact Us</a></li>
       </ul>
@@ -165,7 +165,7 @@ body {
         </a>
 
         <!-- Profile Icon (shown when loggedIn) -->
-      <a id="profileIcon" href="/profile.html" class="js-profile-icon hidden md:block ml-6">
+      <a id="profileIcon" href="/profile" class="js-profile-icon hidden md:block ml-6">
   <div id="profileInitials" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">
     <!-- Initials will go here -->
   </div>
@@ -189,19 +189,19 @@ body {
 
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#000000]/95 px-5 py-3 space-y-3 font-medium">
-      <a href="index.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Home</a>
+      <a href="index" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Home</a>
       <div class="px-3 py-2">
         <div class="flex items-center text-white mb-1">Events</div>
         <div class="ml-4 space-y-2 mt-2">
-          <a href="ongoing.html"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Ongoing</a>
-          <a href="upcoming.html" class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Upcoming</a>
-          <a href="archive.html"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Archive</a>
+          <a href="ongoing"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Ongoing</a>
+          <a href="upcoming" class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Upcoming</a>
+          <a href="archive"  class="block px-3 py-1 hover:bg-[#6B21A8]/50 rounded text-sm transition duration-200">Archive</a>
         </div>
       </div>
-      <a href="team.html"    class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Team</a>
-      <a href="gallery.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Gallery</a>
-      <a href="about.html"   class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">About</a>
-      <a href="contact.html" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Contact Us</a>
+      <a href="team"    class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Team</a>
+      <a href="gallery" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Gallery</a>
+      <a href="about"   class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">About</a>
+      <a href="contact" class="block px-3 py-2 hover:bg-[#6B21A8]/50 rounded transition duration-200">Contact Us</a>
 
       <!-- Mobile Login (when loggedOut) -->
       <a id="loginBtn" href="/login"
@@ -228,7 +228,7 @@ body {
         Since our launch in 2019, we've been defying limits and creating stellar experiences.
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="joinus.html"
+        <a href="joinus"
           class="px-6 py-3 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6] rounded-lg font-medium hover:from-[#6D28D9] hover:to-[#2563EB] transition text-white">Join Our Organization</a>
         <a href="#channels"
           class="px-6 py-3 border border-[#6B21A8] text-[#A855F7] rounded-lg font-medium hover:bg-[#6B21A8]/30 transition">Explore more</a>
@@ -435,11 +435,83 @@ body {
               <span>Education camps in rural areas</span>
             </li>
           </ul>
-          <div class="flex items-center gap-4">
-           
-          </div>
+          
         </div>
       </div>
+        <!-- Contact Us Section -->
+   <form id="contact-form">
+  <section id="contactus" class="px-6 md:px-16 py-20 relative z-10">
+    <div class="max-w-4xl mx-auto text-center mb-16 animate-fadeIn">
+      <h2 class="font-extrabold text-white mb-4 text-3xl md:text-4xl">
+        <span class="bg-gradient-to-r from-[#A855F7] to-[#3B82F6] bg-clip-text text-transparent">
+          Get in Touch
+        </span>
+      </h2>
+      <p class="text-lg text-[#9CA3AF] max-w-2xl mx-auto">
+        Reach out to the Gravity Club team for inquiries, collaborations, or just to say hello! We’re here to connect and make things happen.
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
+      <!-- Contact Form -->
+      <div class="bg-[#000000]/70 backdrop-blur-md rounded-xl p-8 border border-[#6B21A8]/30 animate-fadeIn">
+        <h3 class="font-bold text-2xl text-white mb-6">Send Us a Message</h3>
+        <div class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-[#D4D4D8] mb-1">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name"
+                   class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg
+                          text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7]
+                          transition duration-300">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-[#D4D4D8] mb-1">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email"
+                   class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg
+                          text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7]
+                          transition duration-300">
+          </div>
+          <div>
+            <label for="subject" class="block text-sm font-medium text-[#D4D4D8] mb-1">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Enter subject"
+                   class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg
+                          text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7]
+                          transition duration-300">
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-[#D4D4D8] mb-1">Message</label>
+            <textarea id="message" placeholder="Your message here" name="message"
+                      class="w-full px-4 py-2 bg-[#1A0B3A]/50 border border-[#6B21A8]/30 rounded-lg
+                             text-[#D4D4D8] focus:outline-none focus:ring-2 focus:ring-[#A855F7]
+                             transition duration-300 h-32 resize-none"></textarea>
+          </div>
+          <button class="w-full px-6 py-3 bg-gradient-to-r from-[#7C3AED] to-[#3B82F6]
+                         rounded-lg font-medium text-white hover:from-[#6D28D9] hover:to-[#2563EB]
+                         transition-all duration-300 hover:shadow-lg hover:shadow-[#7C3AED]/20">
+            Send Message
+          </button>
+        </div>
+      </div>
+</form>
+      <!-- Contact Info & Socials -->
+      <div class="flex flex-col justify-center animate-fadeIn">
+        <h3 class="font-bold text-2xl text-white mb-6">Contact Information</h3>
+        <ul class="space-y-4 text-[#9CA3AF]">
+          <li class="flex items-center"><span class="text-[#A855F7] mr-2">✉️</span>gravitylpuofficial@gmail.com</li>
+          <li class="flex items-center"><span class="text-[#A855F7] mr-2">📍</span>Lovely Professional University, Phagwara, Punjab 144411</li>
+          <li class="flex items-center"><span class="text-[#A855F7] mr-2">📞</span>+91 6280 136 085</li>
+        </ul>
+        <h3 class="font-bold text-lg text-white mt-8 mb-4">Follow Us</h3>
+        <div class="flex gap-4">
+          <a href="https://www.instagram.com/gravity.lpu?igsh=YjhlMzZ5ZTdjdTAy" target="_blank" title="Instagram">
+            <img src="Images/instagram.png" alt="Instagram" class="h-8 w-8">
+          </a>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
     </div>
   </section>
 
@@ -459,19 +531,15 @@ body {
       <div>
         <h3 class="font-bold text-lg text-white mb-4">Quick Links</h3>
         <ul class="space-y-3">
-          <li><a href="index.html" class="text-[#9CA3AF] hover:text-[#A855F7]">Home</a></li>
-          <li><a href="gallery.html" class="text-[#9CA3AF] hover:text-[#A855F7]">Gallery</a></li>
-          <li><a href="#contactus" class="text-[#9CA3AF] hover:text-[#A855F7]">Contact Us</a></li>
+          <li><a href="index" class="text-[#9CA3AF] hover:text-[#A855F7]">Home</a></li>
+          <li><a href="gallery" class="text-[#9CA3AF] hover:text-[#A855F7]">Gallery</a></li>
         </ul>
       </div>
 
       <div>
         <h3 class="font-bold text-lg text-white mb-4">Events</h3>
         <ul class="space-y-3">
-          <li><a href="ongoing.html" class="text-[#9CA3AF] hover:text-[#3B82F6]">Ongoing Events</a></li>
-          <li><a href="upcoming.html" class="text-[#9CA3AF] hover:text-[#3B82F6]">Upcoming Events</a></li>
-          <li><a href="archive.html" class="text-[#9CA3AF] hover:text-[#3B82F6]">Event Archive</a></li>
-          <li><a href="#" class="text-[#9CA3AF] hover:text-[#3B82F6]">Submit Proposal</a></li>
+          <li><a href="upcomingevents" class="text-[#9CA3AF] hover:text-[#3B82F6]">Upcoming Events</a></li>
         </ul>
       </div>
 
@@ -496,12 +564,7 @@ body {
       </div>
     </div>
 
-    <div class="relative">
-      <a href="mailto:srinarendraofficial@gmail.com"
-        class="absolute bottom-1 right-1 text-[#9CA3AF] text-xs opacity-30 hover:opacity-100 transition-opacity">
-        MADE BY SRI
-      </a>
-    </div>
+    
   </footer>
 
   <!-- Scripts -->

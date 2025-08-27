@@ -12,10 +12,12 @@ import forgotpassword_router from './src/routers/forgotpassword_router.js';
 import newpassword_router from './src/routers/newpassword_router.js';
 import updatedashboard_route from './src/routers/updatedashboard.router.js';
 import contactus_router from './src/routers/contactus.router.js';
-import {User} from './src/models/user.models.js';
+import { User } from './src/models/user.models.js';
+
 dotenv.config();
 
 const app = express();
+
 // Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,69 +26,67 @@ const __dirname = path.dirname(__filename);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ✅ Session middleware (should come BEFORE routers!)
+// ✅ Session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  // No 'cookie.maxAge' set => session becomes a browser-session cookie
 }));
 
-// ✅ Then use routers (they now have access to session)
+// ✅ Routers
 app.use(reg_router);
 app.use(login_router);
 app.use(logout_router);
-app.use(forgotpassword_router)
-app.use(verifyotp_router)
-app.get(login_router)
-app.use(newpassword_router)
+app.use(forgotpassword_router);
+app.use(verifyotp_router);
+app.use(newpassword_router);
 app.use(updatedashboard_route);
-app.use(contactus_router)
-// Serve static files
+app.use(contactus_router);
 
+// 🔹 Step 2: Serve pretty URLs automatically
+app.use((req, res, next) => {
+  // Skip directories and API endpoints
+  if (
+    req.path.endsWith('/') ||
+    req.path.startsWith('/api') ||
+    req.path.startsWith('/session-info')
+  ) return next();
+
+  const filePath = path.join(__dirname, 'pages', req.path + '.html');
+  res.sendFile(filePath, (err) => {
+    if (err) next(); // continue if file not found
+  });
+});
+
+// 🔹 Step 3: Serve static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, 'pages')));
-// HTML page routes
- app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'login.html'));
-});
-app.get('/index', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'index.html'));
-});
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'login.html'));
-});
-app.get('/forgotpassword', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'forgotpassword.html'));
-});
-app.get('/verifyotp', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'verifyotp.html'));
-});
-app.get('/newpassword',(req,res)=>{
-  res.sendFile(path.join(__dirname, 'pages', 'newpassword.html'));
-})
+app.use(express.static(path.join(__dirname, 'src', 'public')));
+
+// 🔹 Session info endpoint
 app.get('/session-info', (req, res) => {
   const toast = req.session.toast;
-  console.log("session toast value:",toast);
-  
   delete req.session.toast;
+
   if (req.session && req.session.user) {
-    
     return res.json({ loggedIn: true, user: req.session.user, toast });
   } else {
     return res.json({ loggedIn: false, toast });
   }
 });
-app.use(express.static(path.join(__dirname, 'src', 'public')));
-app.get("/api/user-info",async (req,res)=>{
+
+// 🔹 User info API
+app.get("/api/user-info", async (req, res) => {
   try {
-const user = await User.findById(req.session.userId).select("name reg_no email academic_year phone_no");
-        res.json(user);
+    const user = await User.findById(req.session.userId)
+      .select("name reg_no email academic_year phone_no");
+    res.json(user);
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-})
-// Start server
+});
+
+// 🔹 Start server
 const startServer = async () => {
   try {
     await connectDB();
@@ -101,7 +101,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-
-
-
